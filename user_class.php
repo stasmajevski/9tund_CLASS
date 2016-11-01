@@ -27,7 +27,7 @@
 		}
 		
 		$stmt->close();
-		$this->connection->close();
+		
 		
 	}
 	
@@ -36,8 +36,7 @@
 		
 		$error = "";
 		
-		$database = "if16_stanislav";
-		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $database);
+		
 
 		$stmt = $this->connection->prepare("
 		SELECT id, email, password, created 

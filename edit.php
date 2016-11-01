@@ -1,13 +1,13 @@
 <?php
 	//edit.php
 	require("functions.php");
-	require("editFunctions.php");
 	
-	
+	require("car_class.php");
+	$Car = new Car($mysqli);
 	//kas kasutaja uuendab andmeid
 	if(isset($_POST["update"])){
 		
-		updateCar(cleanInput($_POST["id"]), cleanInput($_POST["plate"]), cleanInput($_POST["color"]));
+		$Car->updateCar($Helper->cleanInput($_POST["id"]), $Helper->cleanInput($_POST["plate"]), $Helper->cleanInput($_POST["color"]));
 		
 		header("Location: edit.php?id=".$_POST["id"]."&success=true");
         exit();	
@@ -16,7 +16,7 @@
 	
 	if(isset($_POST["delete"])){
 		
-		deleteCar(cleanInput($_POST["id"]));
+		$Car->deleteCar($Helper->cleanInput($_POST["id"]));
 		
 		header("Location: edit.php?id=".$_POST["id"]."&delete=true");
         exit();	
@@ -29,7 +29,7 @@
 	}
 		if(isset($_GET["delete"]))
 	{
-		deleteCar($_GET["id"]);
+		$Car->deleteCar($_GET["id"]);
 	}
 	//lisame kontrolli , kui ei ole id'd addressireal siis suunan
 	if(!isset($_GET["id"]))
@@ -38,7 +38,7 @@
 		exit();
 	}
 	//saadan kaasa id
-	$c = getSingleCarData($_GET["id"]);
+	$c = $Car->getSingleCarData($_GET["id"]);
 	var_dump($c);
 
 

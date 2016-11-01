@@ -1,0 +1,13 @@
+<?php class KLASS_NIMI
+{
+	private $connection;
+	
+	
+	function __construct($mysqli)
+	{
+			// osobennost v PHP   $this ukazivaet na objekt klassa
+	  $this->connection = $mysqli;
+	  
+	}
+}
+?>

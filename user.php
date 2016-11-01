@@ -1,7 +1,8 @@
 <?php 
 	
 	require("functions.php");
-	
+	require("interest.class.php");
+	$Interest = new Interest($mysqli);
 	//kui ei ole kasutaja id'd
 	if (!isset($_SESSION["userId"])){
 		
@@ -32,7 +33,7 @@
 		!empty($_POST["interest"])
 	  ) {
 		  
-		saveInterest(cleanInput($_POST["interest"]));
+		$Interest->saveInterest($Helper->cleanInput($_POST["interest"]));
 		
 	}
 	
@@ -40,12 +41,12 @@
 		!empty($_POST["userInterest"])
 	  ) {
 		  
-		saveUserInterest(cleanInput($_POST["userInterest"]));
+		$Interest->saveUserInterest($Helper->cleanInput($_POST["userInterest"]));
 		
 	}
 	
-    $interests = getAllInterests();
-    $userInterests = getAllUserInterests();
+    $interests = $Interest->getAllInterests();
+    $userInterests = $Interest->getAllUserInterests();
 	
 ?>
 <h1><a href="data.php"> < tagasi</a> Kasutaja leht</h1>
