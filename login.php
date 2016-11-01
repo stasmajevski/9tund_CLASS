@@ -106,7 +106,7 @@
 		// KASUTAN FUNKTSIOONI
 		$signupEmail = cleanInput($signupEmail);
 		
-		signUp($signupEmail, cleanInput($password));
+		$User->signUp($signupEmail, cleanInput($password));
 		
 	
 	}
@@ -119,7 +119,7 @@
 		!empty($_POST["loginPassword"])
 	  ) {
 		  
-		$error = login(cleanInput($_POST["loginEmail"]), cleanInput($_POST["loginPassword"]));
+		$error = $User->login(cleanInput($_POST["loginEmail"]), cleanInput($_POST["loginPassword"]));
 		
 	}
 	
