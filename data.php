@@ -4,7 +4,7 @@
 	require("car_class.php");
 	$Car = new Car($mysqli);
 	//kui ei ole kasutaja id'd
-	if (!isset($_SESSION["userId"])){
+	if (!isset($_SESSION["userID"])){
 		
 		//suunan sisselogimise lehele
 		header("Location: login.php");
@@ -38,9 +38,19 @@
 		$Car->saveCar($Helper->cleanInput($_POST["plate"]), $Helper->cleanInput($_POST["color"]));
 		
 	}
-	
+	// kas otsib
+	if(isset($_GET["q"]))
+	{
+		$q=$Helper->cleanInput($_GET["q"]);
+		$carData = $Car->getAllCars($q);
+	}
+	else
+	{
+		$q = "";
+		$carData = $Car->getAllCars($q);
+	}
 	//saan kõik auto andmed
-	$carData = $Car->getAllCars();
+	
 	//echo "<pre>";
 	//var_dump($carData);
 	//echo "</pre>";
@@ -70,6 +80,10 @@
 </form>
 
 <h2>Autod</h2>
+<form>
+	<input type="search" name="q">
+	<input type="submit" value="Otsi">	
+</form>
 <?php 
 	
 	$html = "<table>";

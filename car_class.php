@@ -30,15 +30,31 @@
 	}
 	
 	
-	function getAllCars() {
+	function getAllCars($q) {
 		
-
-		
-		$stmt = $this->connection->prepare("
+		if($q=="")
+		{
+			echo "ei otsi";
+			$stmt = $this->connection->prepare("
 			SELECT id, plate, color
 			FROM car_and_colors
 			WHERE deleted IS NULL
 		");
+		}
+		else
+		{
+		echo "Otsib: ".$q;
+		$searchword="%".$q."%";
+		$stmt = $this->connection->prepare("
+			SELECT id, plate, color
+			FROM car_and_colors
+			WHERE deleted IS NULL AND
+			(plate LIKE ? OR color LIKE ?)
+		");
+		$stmt->bind_param("ss",$searchword,$searchword);	
+		}
+	
+		
 		echo $this->connection->error;
 		
 		$stmt->bind_result($id, $plate, $color);

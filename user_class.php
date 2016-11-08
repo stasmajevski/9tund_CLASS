@@ -65,7 +65,7 @@
 				
 				//m‰‰ran sessiooni muutujad, millele saan ligi
 				// teistelt lehtedelt
-				$_SESSION["userId"] = $id;
+				$_SESSION["userID"] = $id;
 				$_SESSION["userEmail"] = $emailFromDb;
 				
 				$_SESSION["message"] = "<h1>Tere tulemast!</h1>";
