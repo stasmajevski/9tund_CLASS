@@ -5,7 +5,7 @@
 	$User = new User($mysqli);
 	
 	// kui on juba sisse loginud siis suunan data lehele
-	if (isset($_SESSION["userId"])){
+	if (isset($_SESSION["userID"])){
 		
 		//suunan sisselogimise lehele
 		header("Location: data.php");

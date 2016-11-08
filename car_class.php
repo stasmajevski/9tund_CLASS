@@ -30,16 +30,33 @@
 	}
 	
 	
-	function getAllCars($q) {
+	function getAllCars($q,$sort,$direction) {
 		
+		$allowedSortOptions=["id","plate","color"];
+		// kas sort on lubatud valikute sees
+		if(!in_array($sort,$allowedSortOptions))
+		{
+			$sort="id";
+		}
+		echo "Sorteerin: ".$sort."<br>";
+		
+		$orderBy="ASC";
+		if($direction == "descending")
+		{
+			$orderBy="DESC";
+		}
+		echo "Order by: ".$orderBy."<br>";
 		if($q=="")
 		{
+			// mis sort ja jarjekord
 			echo "ei otsi";
 			$stmt = $this->connection->prepare("
 			SELECT id, plate, color
 			FROM car_and_colors
 			WHERE deleted IS NULL
+			ORDER BY $sort $orderBy
 		");
+		//$stmt->bind_param("s",$sort);  - s ORDER BY ne rabotaet !!!!
 		}
 		else
 		{
@@ -50,6 +67,7 @@
 			FROM car_and_colors
 			WHERE deleted IS NULL AND
 			(plate LIKE ? OR color LIKE ?)
+			ORDER BY $sort $orderBy
 		");
 		$stmt->bind_param("ss",$searchword,$searchword);	
 		}
