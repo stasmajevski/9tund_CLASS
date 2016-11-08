@@ -1,12 +1,12 @@
 <?php
 
-	require("../../../config.php");
+	require("/home/stanmaje/config.php");
 	
 	// podsoedinaem klass User
 	
 	
 	
-	require("helper_class.php");
+	require("../class/helper_class.php");
 	
 	// inicializiruem objekti
 	$database ="if16_stanislav";
